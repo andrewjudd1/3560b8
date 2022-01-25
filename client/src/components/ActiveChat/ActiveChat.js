@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles} from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import { Input, Header, Messages } from "./index";
 import { connect } from "react-redux";
@@ -22,8 +22,10 @@ const useStyles = makeStyles(() => ({
 
 const ActiveChat = (props) => {
   const classes = useStyles();
-  const { user } = props;
+  const { user, refresh} = props;
   const conversation = props.conversation || {};
+
+  
 
   return (
     <Box className={classes.root}>
@@ -35,11 +37,12 @@ const ActiveChat = (props) => {
           />
           <Box className={classes.chatContainer}>
             <Messages
-              messages={conversation.messages}
+              messages={conversation.messages.slice().reverse()}
               otherUser={conversation.otherUser}
               userId={user.id}
             />
             <Input
+              refresh={refresh}
               otherUser={conversation.otherUser}
               conversationId={conversation.id}
               user={user}
