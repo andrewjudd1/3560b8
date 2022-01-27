@@ -69,11 +69,9 @@ const Input = (props) => {
 
   const uploadImage = (e) => {
     const file = e.target.files[0]
-    console.log(file)
     const formData = new FormData();
     formData.set('file', file);
     formData.set('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    console.log(formData.get('upload_preset'))
 
     fetch(CLOUDINARY_URL, {
       method: 'POST',
@@ -84,9 +82,7 @@ const Input = (props) => {
       if (data.secure_url !== '') {
         
         const uploadedFileUrl = data.secure_url
-        console.log(uploadedFileUrl)
         let newImage = uploadedFileUrl
-        console.log(newImage)
         
         setImages([...images, newImage])
       }
