@@ -5,3 +5,4 @@ const db = new Sequelize(process.env.DATABASE_URL || "postgres:localhost:null//l
   logging: false
 });
 
+module.exports = db;
