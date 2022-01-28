@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
 
 const ActiveChat = (props) => {
   const classes = useStyles();
-  const { user, refresh} = props;
+  const { user} = props;
   const conversation = props.conversation || {};
 
   
@@ -37,12 +37,11 @@ const ActiveChat = (props) => {
           />
           <Box className={classes.chatContainer}>
             <Messages
-              messages={conversation.messages.slice().reverse()}
+              messages={conversation.messages}
               otherUser={conversation.otherUser}
               userId={user.id}
             />
             <Input
-              refresh={refresh}
               otherUser={conversation.otherUser}
               conversationId={conversation.id}
               user={user}

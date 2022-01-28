@@ -18,8 +18,6 @@ const Home = (props) => {
   const classes = useStyles();
   const { user, logout, fetchConversations } = props;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [render, setRender] = useState(0)
-
 
   useEffect(() => {
     if (user.id) {
@@ -29,7 +27,7 @@ const Home = (props) => {
 
   useEffect(() => {
     fetchConversations();
-  }, [fetchConversations, render]);
+  }, [fetchConversations]);
 
   if (!user.id) {
     // If we were previously logged in, redirect to login instead of register
@@ -41,10 +39,6 @@ const Home = (props) => {
     await logout(user.id);
   };
 
-  const refresh = () => {
-    setRender(render + 1)
-  }
-
   return (
     <>
       {/* logout button will eventually be in a dropdown next to username */}
@@ -54,7 +48,7 @@ const Home = (props) => {
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <SidebarContainer />
-        <ActiveChat refresh={refresh}/>
+        <ActiveChat />
       </Grid>
     </>
   );
