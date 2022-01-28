@@ -109,7 +109,6 @@ export const postMessage = (body) => async (dispatch) => {
   try {
     console.log(body)
     const data = await saveMessage(body);
-    console.log(data)
     if (!body.conversationId) {
      dispatch(addConversation(body.recipientId, data.message));
     } else {
