@@ -11,18 +11,14 @@ const useStyles = makeStyles(() => ({
     justifySelf: "flex-end",
     marginTop: 15
   },
-  
-  ImageInputContainer: {
+  imageInputContainer: {
     position: 'relative',
     marginBottom: 20,
     height: 70,
     borderRadius: 8,
     backgroundColor: "#F4F6FA",
-
-
   },
- 
-  Input: {
+  input: {
     position: 'absolute',
     width: '100%',
     height: 70,
@@ -31,33 +27,31 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#F4F6FA",
 
   },
-  ImageInputLabel: {
+  imageInputLabel: {
     position: 'absolute',
     right: '10px',
     top: 'calc(50% - 8px)',
     cursor: 'pointer',
   },
-  ImageInput: { 
+  imageInput: { 
     display: 'none'
   },
-  ImageUploadContainer: {
+  imageUploadContainer: {
     display: 'flex',
     width: '100%',
     background: '#F4F6FA',
   },
-  ImageUploadTopContainer: {
+  imageUploadTopContainer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  ImageUpload: {
+  imageUpload: {
     width: '200px',
   }
 }));
 
 const Input = (props) => {
-  const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/andrew-judd/image/upload'
-  const CLOUDINARY_UPLOAD_PRESET = 'oxzlmelj'
   const classes = useStyles();
   const [text, setText] = useState("")
   const [images, setImages] = useState([]); 
@@ -67,29 +61,26 @@ const Input = (props) => {
     setText(event.target.value);
   };
 
-  const uploadImage = (e) => {
+  const uploadImage = async (e) => {
+    try {
     const file = e.target.files[0]
     const formData = new FormData();
     formData.set('file', file);
-    formData.set('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-
-    fetch(CLOUDINARY_URL, {
+    formData.set('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+    const response = await fetch(process.env.REACT_APP_CLOUDINARY_URL, {
       method: 'POST',
       body: formData
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.secure_url !== '') {
-        
+    const data = await response.json()
+      if (data.secure_url !== '') { 
         const uploadedFileUrl = data.secure_url
         let newImage = uploadedFileUrl
-        
         setImages([...images, newImage])
       }
-      
-    }).catch(err => console.log(err))
-
-  }
+    } catch (error) {
+      console.log(error)
+    } 
+    }
   const deleteImage = (images, index) => {
    const newArray = images.filter(image=> images.indexOf(image) !== index)
    setImages(newArray)
@@ -113,21 +104,21 @@ const Input = (props) => {
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
-      <Box className={classes.ImageUploadContainer}>
+      <Box className={classes.imageUploadContainer}>
         {images.map((image, index) => 
-          <Box key={index}>
-              <Box className={classes.ImageUploadTopContainer}>
+          <Box key={image}>
+              <Box className={classes.imageUploadTopContainer}>
               <Typography>{`Image${index + 1}:`}
               </Typography>
               <Button onClick={() => deleteImage(images, index)}><Delete/></Button>
               </Box>
-              <img className={classes.ImageUpload} alt={'upload'} src={image}>
+              <img className={classes.imageUpload} alt={'upload'} src={image}>
               </img>
           </Box>)}
       </Box>
-      <Box className={classes.ImageInputContainer}>
+      <Box className={classes.imageInputContainer}>
         <FilledInput
-          className={classes.Input}
+          className={classes.input}
           disableUnderline
           placeholder="Type something..."
           value={text}
@@ -135,12 +126,12 @@ const Input = (props) => {
           onChange={handleChange}
         >
         </FilledInput>
-        <InputLabel className={classes.ImageInputLabel} htmlFor='imageInput'>
+        <InputLabel className={classes.imageInputLabel} htmlFor='imageInput'>
           <CropOriginalIcon/>
         </InputLabel>
       </Box>
       <FilledInput
-        className={classes.ImageInput}
+        className={classes.imageInput}
         id='imageInput'
         onChange={uploadImage}
         type="file">

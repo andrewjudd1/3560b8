@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
     fontWeight: "bold",
     marginBottom: 5,
   },
-  OneImageDate: {
+  oneImageDate: {
     order: '0',
     fontSize: 11,
     color: "#BECCE2",
@@ -33,32 +33,28 @@ const useStyles = makeStyles(() => ({
   bubble: {
     background: "#F4F6FA",
     borderRadius: "10px 10px 0 10px",
-    
   },
-  OneImageBubble: {
+  oneImageBubble: {
     order: '1',
     background: "#F4F6FA",
     borderRadius: "10px 10px 0 10px",
   },
-  ImageList: {
+  imageList: {
     display: 'flex',
     gap: '5px',
   },
-  ImageListItem: {
+  imageListItem: {
     display: 'flex',
     position: 'relative',
   },
-  Image: {
+  image: {
     width: '100px',
     objectFit: 'contain',
     cursor: 'pointer',
     borderRadius: '15px',
     border: '1px solid transparent',
   },
-  OneImageListItem: {
-
-  },
-  OneImage: {
+  oneImage: {
     width: '200px',
     objectFit: 'contain',
     cursor: 'pointer',
@@ -75,35 +71,35 @@ const SenderBubble = (props) => {
       <Typography 
         className={attachments?.length > 1 ? 
         classes.date :
-        classes.OneImageDate}>
+        classes.oneImageDate}>
         {time}
       </Typography>
       <Box 
         className={attachments?.length > 1 ? 
         classes.bubble : 
-        classes.OneImageBubble}>
+        classes.oneImageBubble}>
         <Typography className={classes.text}>
           {text}
         </Typography>
       </Box>
-      <Box className={classes.ImageList}> {
+      <Box className={classes.imageList}> {
         attachments?.length > 1 ?
           attachments.map((attachment, index) => (  
             <Box 
-              key={index} 
-              className={classes.ImageListItem} >
+              key={attachment}
+              className={classes.imageListItem} >
                 <img
                   onClick={() => window.open(attachment)}
-                  className={classes.Image}
+                  className={classes.image}
                   src={attachment}
-                  alt={index}/> 
+                  alt={attachment}/> 
               </Box>)) : 
         attachments?.length > 0 &&
           <Box 
-            className={classes.OneImageListItem} >
+            className={classes.oneImageListItem} >
             <img
               onClick={() => window.open(attachments[0])}
-              className={classes.OneImage}
+              className={classes.oneImage}
               src={attachments[0]}
               alt={'one'}/> 
           </Box> }
