@@ -53,10 +53,8 @@ const useStyles = makeStyles(() => ({
 
 const Input = (props) => {
   const classes = useStyles();
-  const [text, setText] = useState("")
-  const [images, setImages] = useState([]); 
-  const { postMessage, otherUser, conversationId, user, refresh} = props;
-  
+  const [text, setText] = useState("");
+  const { postMessage, otherUser, conversationId, user} = props;
   const handleChange = (event) => {
     setText(event.target.value);
   };
@@ -98,8 +96,6 @@ const Input = (props) => {
     };
     await postMessage(reqBody);
     setText("");
-    setImages([])
-    refresh()
   };
 
   return (
