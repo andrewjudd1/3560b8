@@ -45,18 +45,12 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     alignItems: 'center',
   },
-  errorMessage: {
-    color: 'red',
-    width: '100%',
-    background: '#F4F6FA',
-  }
 }));
 const Input = (props) => {
   const classes = useStyles();
   const [text, setText] = useState("");
   const [images, setImages] = useState([])
   const [files, setFiles] = useState([])
-  const [errorMessage, setErrorMessage] = useState('')
   const { postMessage, otherUser, conversationId, user} = props;
   
   const handleChange = (event) => {
@@ -64,34 +58,32 @@ const Input = (props) => {
   };
 
   const imageAPICall = async (formData) => {
-    let response = await fetch(process.env.REACT_APP_CLOUDINARY_URL, {
-      method: 'POST',
-      body: formData
-    })
-    let data = await response.json()
-    if (data.secure_url !== '') {
-      let uploadedFileUrl = data.secure_url
-      let newImage = uploadedFileUrl
-      return newImage
+    try {
+      let response = await fetch(process.env.REACT_APP_CLOUDINARY_URL, {
+        method: 'POST',
+        body: formData
+      })
+      let data = await response.json()
+      if (data.secure_url !== '') {
+        let uploadedFileUrl = data.secure_url
+        let newImage = uploadedFileUrl
+        return newImage
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
-  const uploadImage = (e) => {
-    if (e.target.files[0] && !images.includes(e.target.files[0].name)) {
+  const uploadImage = async (e) => {
+    try {
       const file = e.target.files[0]
       const formData = new FormData()
       formData.set('file', file)
       formData.set('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET)
       setImages([...images, e.target.files[0].name])
       setFiles([...files, () => new Promise((resolve) => resolve(imageAPICall(formData)))])
-    }
-    else if (images.includes(e.target.files[0]?.name)) {
-        setErrorMessage('file already added.')
-        setTimeout(() => {setErrorMessage('')}, 3000)
-    }
-    else {
-        setErrorMessage('error uploading file.')
-        setTimeout(() => {setErrorMessage('')}, 3000)
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -104,18 +96,24 @@ const Input = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const imageUrls = await Promise.all(files.map((getImage) => {
-      return getImage()
-    }))
-      // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
-    const reqBody = {
-      text: event.target.text.value,
-      recipientId: otherUser.id,
-      conversationId,
-      sender: conversationId ? null : user,
-      attachments: imageUrls
-    };
-    postMessage(reqBody);
+    try {
+      const imageUrls = await Promise.all(files.map((getImage) => {
+        return getImage()
+      }))
+        // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
+      const reqBody = {
+        text: event.target.text.value,
+        recipientId: otherUser.id,
+        conversationId,
+        sender: conversationId ? null : user,
+        attachments: imageUrls
+      };
+      
+      postMessage(reqBody);
+
+    } catch (error) {
+      console.log(error)
+    }
     setText("");
     setFiles([])
     setImages([]) 
@@ -135,10 +133,6 @@ const Input = (props) => {
               </Box>
           </Box>)}
       </Box>
-      {errorMessage && 
-            <Typography className={classes.errorMessage}>
-                {errorMessage}
-            </Typography> }
       <Box className={classes.imageInputContainer}>
         <FilledInput
           className={classes.input}
