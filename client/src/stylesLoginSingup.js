@@ -6,7 +6,7 @@ import {
 } from "@material-ui/core";
 
  export const useStyles = makeStyles(() => ({
-    MainWrapper: {
+    mainWrapper: {
     height: '100vh',
     overflow: 'hidden',
     
@@ -16,7 +16,7 @@ import {
       height: '100vh',
     },
     },
-    BackgroundContainer: {
+    backgroundContainer: {
       width: '100%',
       display: 'grid',
     position: 'relative',
@@ -25,7 +25,7 @@ import {
     },
     
     },
-    BackgroundContentContainer: {
+    backgroundContentContainer: {
       display: 'grid',
       width: '100%',
       height: '100%',
@@ -41,10 +41,10 @@ import {
        top: '10px'
       },
     },
-    BackgroundBubble: {
+    backgroundBubble: {
       justifySelf: 'center',
     },
-    BackgroundText: {
+    backgroundText: {
       margin: '50px 0 0 0',
       width: '400px',
       fontFamily: 'Open Sans',
@@ -66,7 +66,7 @@ import {
       },
       
     },
-    BackgroundFilter: {
+    backgroundFilter: {
       position: 'absolute',
       background: 'linear-gradient(180deg, #3A8DFF 0%, #86B9FF 100%)',
       opacity: '0.85',
@@ -79,7 +79,7 @@ import {
         height: '30vh',
       },
     },
-    BackgroundImage: {
+    backgroundImage: {
       width: '100%',
       height: '100vh',
       maxHeight: '800px',
@@ -94,7 +94,7 @@ import {
     
       },
     },
-    LoginContainer: {
+    loginContainer: {
       display: 'grid',
       gridTemplateColumns: 'repeat(12, 1fr)',
       gridTemplateRows: '100px 1fr',
@@ -104,7 +104,7 @@ import {
         height: '40vh',
       }
     },
-    LoginTopText: {
+    loginTopText: {
       fontFamily: 'Open Sans',
       gridColumn: '2 / span 8',
       alignSelf: 'center',
@@ -119,7 +119,7 @@ import {
         textAlign: 'center',
       }
     },
-    LoginTopButton: {
+    loginTopButton: {
       fontFamily: 'Open Sans',
       gridColumn: '10 / span 3',
       minWidth: '160px',
@@ -142,7 +142,7 @@ import {
         justifySelf: 'center'
       }
     },
-    LoginForm: {
+    loginForm: {
       gridColumn: '1 / span 12',
       justifySelf: 'center',
       '@media (max-width: 800px)': {
@@ -150,10 +150,10 @@ import {
         justifySelf: 'center',
       } 
     },
-    FormContainer: {
+    formContainer: {
       display: 'grid',
     },
-    FormTitle: {
+    formTitle: {
       fontFamily: 'Open Sans',
       fontWeight: '600',
       fontSize: '26px',
@@ -163,14 +163,14 @@ import {
         margin: '20px 0 20px 0',
       }
     },
-    FormControl: { 
+    formControl: { 
       position: 'relative',
      width: '380px', 
      '@media (max-width: 400px)': {
        width: '300px',
      }
     },
-    FormControlTextArea: {
+    formControlTextArea: {
       color: '#B0B0B0',
       fontSize: '14px',
       lineHeight: '19px',
@@ -181,23 +181,23 @@ import {
         color: "#B0B0B0"
       }
     },
-    FormButton: {
-    fontFamily: 'Open Sans',
-    padding: '12px 55px',
-    justifySelf: 'center',
-    borderRadius: '3px',
-    background: '#3A8DFF',
-    color: 'white',
-    margin: '50px 0 0 0',
-    '&:hover': {
-      background: 'white',
-      color: '#3A8DFF',
+    formButton: {
+      fontFamily: 'Open Sans',
+      padding: '12px 55px',
+      justifySelf: 'center',
+      borderRadius: '3px',
+      background: '#3A8DFF',
+      color: 'white',
+      margin: '50px 0 0 0',
+      '&:hover': {
+        background: 'white',
+        color: '#3A8DFF',
+      },
+      '@media (max-width: 800px)': {
+        margin: '30px 0 20px 0',
+      }
     },
-    '@media (max-width: 800px)': {
-      margin: '30px 0 20px 0',
-    }
-    },
-    FormForgotPassword: {
+    formForgotPassword: {
       position: 'absolute',
       top: '26px',
       right: '0',
@@ -214,18 +214,18 @@ export function SideImageBackground() {
   const classes = useStyles()
 
   return (
-    <Grid className={classes.BackgroundContainerSize} container xs={5}>
-        <Box className={classes.BackgroundContainer}>
-          <Box className={classes.BackgroundFilter}/>
-          <Box className={classes.BackgroundContentContainer}>
-          <img className={classes.BackgroundBubble} 
+    <Grid className={classes.backgroundContainerSize} container xs={5}>
+        <Box className={classes.backgroundContainer}>
+          <Box className={classes.backgroundFilter}/>
+          <Box className={classes.backgroundContentContainer}>
+          <img className={classes.backgroundBubble} 
           src='./assets/bubble.svg' alt='bubble'>
           </img>
-          <Typography className={classes.BackgroundText}>
+          <Typography className={classes.backgroundText}>
             Converse with anyone with any language
             </Typography>
           </Box>
-          <img className={classes.BackgroundImage} 
+          <img className={classes.backgroundImage} 
           src='./assets/bg-img.png' alt='bg-img'>
           </img>
         </Box>

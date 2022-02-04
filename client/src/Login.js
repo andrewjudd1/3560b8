@@ -30,49 +30,49 @@ const Login = (props) => {
   }
 
   return (
-    <Grid className={classes.MainWrapper} container >
+    <Grid className={classes.mainWrapper} container >
       <SideImageBackground/>
       <Grid container xs={7}>
-        <Grid className={classes.LoginContainer} container item >
-          <Typography className={classes.LoginTopText}>
+        <Grid className={classes.loginContainer} container item >
+          <Typography className={classes.loginTopText}>
             Don't have an account?
           </Typography>
-          <Button className={classes.LoginTopButton} 
+          <Button className={classes.loginTopButton} 
             onClick={() => history.push("/register")}>
             Create Account
           </Button>
-          <form className={classes.LoginForm} 
+          <form className={classes.loginForm} 
             onSubmit={handleLogin}>
-            <Grid className={classes.FormContainer}>
-              <Typography className={classes.FormTitle} >
+            <Grid className={classes.formContainer}>
+              <Typography className={classes.formTitle} >
                 Welcome back!
               </Typography>
-              <FormControl className={classes.FormControl} 
+              <FormControl className={classes.formControl} 
                 margin="normal" required>
                 <TextField
                   InputLabelProps={{
-                  className: classes.FormControlTextArea,
+                  className: classes.formControlTextArea,
                   }}
                   aria-label="username"
                   label="E-mail address"
                   name="username"
                   type="text"/>
               </FormControl>
-              <FormControl className={classes.FormControl} 
+              <FormControl className={classes.formControl} 
               margin="normal" required>
-                <TextField className={classes.TextFieldTwo}
+                <TextField className={classes.fextFieldTwo}
                 InputLabelProps={{
-                  className: classes.FormControlTextArea,
+                  className: classes.formControlTextArea,
                   }}
                   label="Password"
                   aria-label="password"
                   type="password"
                   name="password"/>
-                <Box className={classes.FormForgotPassword}>
+                <Box className={classes.formForgotPassword}>
                   Forgot?
                 </Box>
               </FormControl>
-              <Button className={classes.FormButton} 
+              <Button className={classes.formButton} 
                 type="submit" variant="contained" size="large">
                 Login
               </Button>

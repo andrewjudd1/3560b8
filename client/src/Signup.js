@@ -38,27 +38,27 @@ const Login = (props) => {
   }
 
   return (
-    <Grid className={classes.MainWrapper} container >
+    <Grid className={classes.mainWrapper} container >
       <SideImageBackground/>
       <Grid container xs={7}>
-      <Grid className={classes.LoginContainer} container item >
-        <Typography className={classes.LoginTopText}>
+      <Grid className={classes.loginContainer} container item >
+        <Typography className={classes.loginTopText}>
           Already have an account?
         </Typography>
-        <Button className={classes.LoginTopButton}
+        <Button className={classes.loginTopButton}
           onClick={() => history.push("/login")}>
           Login
         </Button>
-        <form className={classes.LoginForm}
+        <form className={classes.loginForm}
           onSubmit={handleRegister}>
-          <Grid className={classes.FormContainer}>
-            <Typography className={classes.FormTitle} >
+          <Grid className={classes.formContainer}>
+            <Typography className={classes.formTitle} >
               Create an account.
             </Typography>
-            <FormControl className={classes.FormControl}>
+            <FormControl className={classes.formControl}>
               <TextField
                 InputLabelProps={{
-                  className: classes.FormControlTextArea,
+                  className: classes.formControlTextArea,
                   }}
                 aria-label="username"
                 label="Username"
@@ -66,10 +66,10 @@ const Login = (props) => {
                 type="text"
                 required/>
             </FormControl>
-            <FormControl className={classes.FormControl}>
+            <FormControl className={classes.formControl}>
               <TextField
               InputLabelProps={{
-                className: classes.FormControlTextArea,
+                className: classes.formControlTextArea,
                 }}
                 label="E-mail address"
                 aria-label="e-mail address"
@@ -77,10 +77,10 @@ const Login = (props) => {
                 name="email"
                 required/>
             </FormControl>
-            <FormControl className={classes.FormControl}>
+            <FormControl className={classes.formControl}>
               <TextField
               InputLabelProps={{
-                className: classes.FormControlTextArea,
+                className: classes.formControlTextArea,
                 }}
                 aria-label="password"
                 label="Password"
@@ -92,11 +92,11 @@ const Login = (props) => {
                 {formErrorMessage.confirmPassword}
               </FormHelperText>
             </FormControl >
-            <FormControl className={classes.FormControl}
+            <FormControl className={classes.formControl}
               error={!!formErrorMessage.confirmPassword}>
             <TextField
             InputLabelProps={{
-              className: classes.FormControlTextArea,
+              className: classes.formControlTextArea,
               }}
               label="Confirm Password"
               aria-label="confirm password"
@@ -108,7 +108,7 @@ const Login = (props) => {
               {formErrorMessage.confirmPassword}
             </FormHelperText>
             </FormControl>
-            <Button  className={classes.FormButton} 
+            <Button  className={classes.formButton} 
               type="submit" variant="contained" size="large">
               Create
             </Button>
